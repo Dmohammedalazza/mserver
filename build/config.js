@@ -86,5 +86,13 @@ exports.default = (0, envalid_1.cleanEnv)(process.env, {
         desc: 'Stream ID',
         default: 'ec02f731-5c6c-4561-a97b-41aa8df88618',
     }),
+    ADMIN: (0, envalid_1.str)({
+        desc: 'Username',
+        default: 'admin',
+    }),
+    PASS: (0, envalid_1.str)({
+        desc: 'Password',
+        default: '88admin00',
+    }),
 });
 //# sourceMappingURL=config.js.map

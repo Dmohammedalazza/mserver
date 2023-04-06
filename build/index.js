@@ -30,6 +30,17 @@ exports.app.use((0, parse_server_2.streamsSync)(parseServer_1.parseServer, {
 exports.app.use(`/server`, parseServer_1.parseServer.app);
 // Add the new route //
 exports.app.use(`/dashboard`, parseDashboard_1.parseDashboard);
+exports.app.post("/webhook", async (req, res) => {
+    console.log(req.body);
+    console.log("Handled!");
+    res.send('Webhook response');
+    res.status(200);
+    // verifySignature(req, config.MORALIS_API_KEY);
+    // const { data, tagName, eventName }: any = parseEventData(req);
+    // console.log(data, tagName, eventName, "logged!");
+    // await parseUpdate(`SFS_${eventName}`, data);
+    // red.end()
+});
 const httpServer = http_1.default.createServer(exports.app);
 httpServer.listen(config_1.default.PORT, async () => {
     if (config_1.default.USE_STREAMS) {

@@ -16,5 +16,11 @@ exports.parseDashboard = new parse_dashboard_1.default({
             masterKey: config_1.default.MASTER_KEY,
         },
     ],
+    users: [
+        {
+            user: config_1.default.ADMIN,
+            pass: config_1.default.PASS,
+        },
+    ],
 }, { allowInsecureHTTP: true });
 //# sourceMappingURL=parseDashboard.js.map

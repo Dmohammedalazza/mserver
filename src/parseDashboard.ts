@@ -12,6 +12,12 @@ export const parseDashboard = new ParseDashboard(
         masterKey: config.MASTER_KEY,
       },
     ],
+    users: [
+      {
+        user: config.ADMIN,
+        pass: config.PASS,
+      },
+    ],
   },
   { allowInsecureHTTP: true }
 );
