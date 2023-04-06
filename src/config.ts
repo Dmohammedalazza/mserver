@@ -67,5 +67,16 @@ export default cleanEnv(process.env, {
     desc: 'Stream ID',
     default: 'ec02f731-5c6c-4561-a97b-41aa8df88618',
   }),
+
+
+  ADMIN: str({
+    desc: 'Username',
+    default: 'admin',
+  }),
+
+  PASS: str({
+    desc: 'Password',
+    default: '88admin00',
+  }),
   
 });

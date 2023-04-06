@@ -14,5 +14,7 @@ declare const _default: Readonly<{
     USE_STREAMS: boolean;
     STREAMS_WEBHOOK_URL: string;
     STREAM_ID: string;
+    ADMIN: string;
+    PASS: string;
 } & import("envalid").CleanedEnvAccessors>;
 export default _default;
