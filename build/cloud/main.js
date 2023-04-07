@@ -34,7 +34,7 @@ Parse.Cloud.define('getServerTime', () => {
 Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
     console.info('hello world run');
     // eth
-    Parse.Cloud.beforeSave("DemoTxs", async (request) => {
+    Parse.Cloud.afterSave("DemoTxs", async (request) => {
         if (request.object.get("confirmed") == false) {
             // console.info(request.object.get("chainId"));
             // return request.object.get("chainId");
@@ -67,7 +67,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         else {
         }
     });
-    Parse.Cloud.beforeSave("LiveTxs", async (request) => {
+    Parse.Cloud.afterSave("LiveTxs", async (request) => {
         if (request.object.get("confirmed") == false) {
             await passallfunc(request, getntwork(request.object.get("chainId")));
             //  var logger = Moralis.Cloud.getLogger();
