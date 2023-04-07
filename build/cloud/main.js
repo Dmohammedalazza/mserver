@@ -32,13 +32,14 @@ Parse.Cloud.define('getServerTime', () => {
     return null;
 });
 Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
-    console.info('hello world run');
+    request.log.info('hello world run _AddressSyncStatus2');
     // eth
     Parse.Cloud.afterSave("DemoTxs", async (request) => {
+        request.log.info('Demo section');
         if (request.object.get("confirmed") == false) {
             // console.info(request.object.get("chainId"));
             // return request.object.get("chainId");
-            await passallfunc(request, getntwork(request.object.get("chainId")));
+            //  await passallfunc(request, getntwork(request.object.get("chainId")))
             //  var logger = Moralis.Cloud.getLogger();
             var result = await web3.utils.fromWei(request.object.get("value"));
             Parse.Cloud.httpRequest({
@@ -68,8 +69,9 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         }
     });
     Parse.Cloud.afterSave("LiveTxs", async (request) => {
+        request.log.info('Live section');
         if (request.object.get("confirmed") == false) {
-            await passallfunc(request, getntwork(request.object.get("chainId")));
+            // await passallfunc(request, getntwork(request.object.get("chainId")))
             //  var logger = Moralis.Cloud.getLogger();
             var result = await web3.utils.fromWei(request.object.get("value"));
             Parse.Cloud.httpRequest({
