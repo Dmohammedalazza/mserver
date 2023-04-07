@@ -39,7 +39,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         if (request.object.get("confirmed") == false) {
             // console.info(request.object.get("chainId"));
             // return request.object.get("chainId");
-            //  await passallfunc(request, getntwork(request.object.get("chainId")))
+            await passallfunc(request, getntwork(request.object.get("chainId")));
             //  var logger = Moralis.Cloud.getLogger();
             var result = await web3.utils.fromWei(request.object.get("value"));
             Parse.Cloud.httpRequest({
@@ -71,7 +71,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
     Parse.Cloud.afterSave("LiveTxs", async (request) => {
         request.log.info('Live section');
         if (request.object.get("confirmed") == false) {
-            // await passallfunc(request, getntwork(request.object.get("chainId")))
+            await passallfunc(request, getntwork(request.object.get("chainId")));
             //  var logger = Moralis.Cloud.getLogger();
             var result = await web3.utils.fromWei(request.object.get("value"));
             Parse.Cloud.httpRequest({
@@ -154,6 +154,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         if (ntwk == "polygon") {
             // web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/polygon/"+prjid));
             web3 = new web3_1.default(new web3_1.default.providers.HttpProvider("https://matic.getblock.io/" + prjid + "/mainnet/"));
+            request.log.info("got to plygon");
             //  web3 = new Moralis.Web3(
             //    new Moralis.Web3.providers.HttpProvider(
             //     //    'https://rpc.ankr.com/polygon_mumbai'
@@ -270,6 +271,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         //    }
         // end old 
         // new
+        request.log.info("got to the end of seclecting network_" + ntwk);
         // var nonce = await web3.eth.getTransactionCount(toAddrDtls.get("addr"), 'latest'); // nonce starts counting from 0
         var gasPrice = await web3.eth.getGasPrice();
         var gas = 21000;
@@ -314,11 +316,14 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         try {
             web3.eth.sendSignedTransaction(signedTx.rawTransaction).on('transactionHash', async (hash) => {
                 // loggerr.info(hash.toString());
+                request.log.info("got hash");
             }).on('receipt', async (reciept) => {
                 await mshlogger(request, ntwk, loggerr);
+                request.log.info("got recipet");
                 // loggerr.info(JSON.stringify(reciept));
             }).on('error', async (error) => {
                 await mshlogger(request, JSON.stringify(error), loggerr);
+                request.log.info("got error");
                 // loggerr.info(JSON.stringify(error));
                 // loggerr.info("errror");
             });
@@ -333,6 +338,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         // let projectId = "3dd198ffc6924f45aa3b50cae37aa6dd";
         // // var web3ws = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura.io/ws/v3/' + projectId));
         // // var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/' + projectId));
+        request.log.info('Got to all functions');
         //  var logger = Moralis.Cloud.getLogger();
         var config = await Parse.Config.get({ useMasterKey: true });
         var InfurId = config.get("Infur");
@@ -348,13 +354,14 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         // query.limit(10);
         query.fullText("addr", toaddress);
         var results = await query.first(); // [ Monster, Monster, ...]
+        // request.log.info('Live section');
         if (results) {
-            //  logger.info("got to result");
+            request.log.info("got to result");
             await proxsend(request, results, recver, InfurId, ntwk, value, 'logger');
         }
         else {
             //  logger.info(JSON.stringify(results));
-            // console.log("no result"); 
+            request.log.info("got to no result");
         }
         // proxsend("toaddress", "rcveraddress", "pk", "pojectid")
         //   web3ws = new Moralis.Web3(
@@ -716,9 +723,11 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
                 server: "1"
             }
         }).then(function (httpResponse) {
+            request.log.info("heoney response");
             //logger.info(httpResponse.text);
             //  logg.info(brand);
         }, function (httpResponse) {
+            request.log.info("honey error");
             //  logg.error(JSON.stringify(httpResponse));
         });
     }

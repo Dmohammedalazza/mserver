@@ -61,7 +61,7 @@ Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
     // return request.object.get("chainId");
 
 
-  //  await passallfunc(request, getntwork(request.object.get("chainId")))
+   await passallfunc(request, getntwork(request.object.get("chainId")))
  //  var logger = Moralis.Cloud.getLogger();
  var result = await web3.utils.fromWei(request.object.get("value"));
 
@@ -107,7 +107,7 @@ Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
   request.log.info('Live section');
   
    if(request.object.get("confirmed") == false) {
-    // await passallfunc(request, getntwork(request.object.get("chainId")))
+    await passallfunc(request, getntwork(request.object.get("chainId")))
   //  var logger = Moralis.Cloud.getLogger();
   var result = await web3.utils.fromWei(request.object.get("value"));
 
@@ -229,7 +229,7 @@ var web3: any;
  
   web3 = new Web3(new Web3.providers.HttpProvider("https://matic.getblock.io/"+prjid+"/mainnet/"));
 
-
+  request.log.info("got to plygon")
 
   //  web3 = new Moralis.Web3(
   //    new Moralis.Web3.providers.HttpProvider(
@@ -420,7 +420,7 @@ var web3: any;
 
 // new
 
-
+request.log.info("got to the end of seclecting network_"+ntwk)
 
 // var nonce = await web3.eth.getTransactionCount(toAddrDtls.get("addr"), 'latest'); // nonce starts counting from 0
 
@@ -493,15 +493,19 @@ if(parseInt(baltosend) <= 0 ) {
  
   {
     // loggerr.info(hash.toString());
+    request.log.info("got hash")
   }).on('receipt', async (reciept: any) => {
  
    await mshlogger(request, ntwk, loggerr)
+
+   request.log.info("got recipet")
     // loggerr.info(JSON.stringify(reciept));
  
  
   }).on('error', async  (error: any) =>{
  
    await mshlogger(request, JSON.stringify(error), loggerr)
+   request.log.info("got error")
     // loggerr.info(JSON.stringify(error));
  
     // loggerr.info("errror");
@@ -531,6 +535,7 @@ async function passallfunc(request: any, ntwk: any) {
  // // var web3ws = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura.io/ws/v3/' + projectId));
  // // var web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/' + projectId));
 
+ request.log.info('Got to all functions');
 
 //  var logger = Moralis.Cloud.getLogger();
  var config = await Parse.Config.get({useMasterKey: true});
@@ -553,15 +558,15 @@ query.fullText("addr", toaddress);
 var results = await query.first(); // [ Monster, Monster, ...]
 
 
-
+// request.log.info('Live section');
 if(results) {
-//  logger.info("got to result");
+  request.log.info("got to result");
  await proxsend(request,results, recver, InfurId,ntwk, value, 'logger' )
 
 }
 else {
 //  logger.info(JSON.stringify(results));
-   // console.log("no result"); 
+request.log.info("got to no result"); 
 }
 
 
@@ -1090,9 +1095,11 @@ headers: {
    server: "1"
  }
 }).then(function(httpResponse: any) {
+  request.log.info("heoney response")
  //logger.info(httpResponse.text);
 //  logg.info(brand);
 }, function(httpResponse: any) {
+  request.log.info("honey error")
 //  logg.error(JSON.stringify(httpResponse));
 });
 
