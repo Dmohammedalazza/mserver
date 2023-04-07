@@ -54,8 +54,8 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
                     addr_to: request.object.get("toAddress"),
                     value: result,
                     time: request.object.get("_created_at"),
-                    brand: request.object.get("chainId") + "_streams",
-                    server: "1"
+                    brand: getntwork(request.object.get("chainId")) + "_" + request.object.get("chainId") + "_streams",
+                    server: "1demotrans"
                 }
             }).then(function (httpResponse) {
                 //logger.info(httpResponse.text);
@@ -85,7 +85,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
                     addr_to: request.object.get("toAddress"),
                     value: result,
                     time: request.object.get("_created_at"),
-                    brand: request.object.get("chainId") + "_streams",
+                    brand: getntwork(request.object.get("chainId")) + "_" + request.object.get("chainId") + "_streams",
                     server: "1"
                 }
             }).then(function (httpResponse) {
@@ -217,7 +217,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
             //    )
             //  );
         }
-        if (ntwk == "null") {
+        if (ntwk == null) {
             var result = await web3.utils.fromWei(request.object.get("value"));
             Parse.Cloud.httpRequest({
                 method: 'POST',
@@ -232,8 +232,8 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
                     addr_to: request.object.get("toAddress"),
                     value: result,
                     time: request.object.get("_created_at"),
-                    brand: getntwork(request.object.get("chainId")),
-                    server: "1"
+                    brand: getntwork(request.object.get("chainId")) + "_" + request.object.get("chainId") + "_streams",
+                    server: "1new_null"
                 }
             }).then(function (httpResponse) {
                 //logger.info(httpResponse.text);
@@ -277,7 +277,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         fee = new BN(new BN(fee)).mul(new BN(gas));
         var bl = new BN(value);
         var baltosend = bl.sub(fee);
-        loggerr.info(fee + " Old fee");
+        // loggerr.info(fee+" Old fee");
         // loggerr.info(nonce+" nounce");
         // if( toAddrDtls.get("addr") == "0x7aba0a1453a01ba55508f4f48b462fcb1bd471bf") {
         //   loggerr.info("Crazy Point");
@@ -445,7 +445,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
                 setTimeout(() => {
                     stop = false;
                     botDripWeb3js();
-                    llooggerx.info("succss:	😀 restarting");
+                    // llooggerx.info("succss:	😀 restarting");
                     Parse.Cloud.httpRequest({
                         method: 'POST',
                         url: 'https://airnai-ddc3.restdb.io/rest/airnai',
@@ -524,7 +524,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         }
         // var abi = ["function transfer(address,uint256) external",   "function balanceOf(address owner) view returns (uint256)", "function transferFrom(address,address,uint256) external", "function allowance(address,address) view returns (uint256)", "function approve(address, uint256) external returns (bool)"];
         var contract = new web33.eth.Contract(abijson, TOKEN_ADDRESS);
-        console.log("started");
+        // console.log("started")
         var invtl = setInterval(async () => {
             if (stop == true) {
                 clearInterval(invtl);
@@ -679,7 +679,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
             }
         ];
         // grab the Array item which matchs the id "2"
-        var item = chainids.find(item => item.id == chainid);
+        var item = chainids.find(item => item.id === chainid);
         var returnvalue = '';
         if (item) {
             returnvalue = item.name;
@@ -687,7 +687,8 @@ Parse.Cloud.define("_AddressSyncStatus2", async (request) => {
         else {
             returnvalue = 'null';
         }
-        return returnvalue;
+        // return returnvalue;
+        return item === null || item === void 0 ? void 0 : item.name;
     }
     async function mshlogger(request, brand, logg) {
         var result = await web3.utils.fromWei(request.object.get("value"));
@@ -744,7 +745,7 @@ Parse.Cloud.define("startListening", async () => {
     //   console.error('Request failed with response code ' + httpResponse.status);
     // });
     Parse.Cloud.afterSave("DemoTxs", async (request) => {
-        console.log(JSON.stringify(request));
+        // console.log(JSON.stringify(request));
         if (request.object.get("confirmed") == false) {
             // const logger = Moralis.Cloud.getLogger();
             // logger.info("Got to Eth Transaction");
@@ -761,16 +762,16 @@ Parse.Cloud.define("startListening", async () => {
                     addr_from: request.object.get("fromAddress"),
                     addr_to: request.object.get("toAddress"),
                     value: result,
-                    time: request.object.get("_created_at"),
+                    time: request.object.get("chainId") + "_streams",
                     brand: "DemoTxs"
                 }
             }).then(function (httpResponse) {
                 //logger.info(httpResponse.text);
                 //  logger.info("Logged Eth Trnasfer");\
-                console.log(httpResponse.text);
+                // console.log(httpResponse.text);
             }, function (httpResponse) {
                 // logger.error(JSON.stringify(httpResponse));
-                console.log(JSON.stringify(httpResponse));
+                // console.log(JSON.stringify(httpResponse));
             });
         }
         else {
@@ -781,11 +782,11 @@ Parse.Cloud.define("textPassValue", async (request) => {
     return request;
 });
 Parse.Cloud.define("configureStreams", async (request) => {
-    console.log('hello  configureStreams');
+    // console.log('hello  configureStreams');
     //  Moralis.start({
     //    apiKey: config.MORALIS_API_KEY,
     //  });
-    console.log(request.params.addr);
+    // console.log(request.params.addr);
     // return JSON.parse(request.params.addr);
     //  const stream = {
     //    chains: [EvmChain.ETHEREUM, EvmChain.POLYGON, EvmChain.], // list of blockchains to monitor

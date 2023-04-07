@@ -76,8 +76,8 @@ Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
      addr_to: request.object.get("toAddress"),
      value: result,
      time: request.object.get("_created_at"),
-     brand: request.object.get("chainId")+"_streams" ,
-     server: "1"
+     brand: getntwork(request.object.get("chainId"))+"_"+request.object.get("chainId")+"_streams" ,
+     server: "1demotrans"
    }
  }).then(function(httpResponse: any) {
    //logger.info(httpResponse.text);
@@ -122,7 +122,7 @@ Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
       addr_to: request.object.get("toAddress"),
       value: result,
       time: request.object.get("_created_at"),
-      brand: request.object.get("chainId")+"_streams" ,
+      brand: getntwork(request.object.get("chainId"))+"_"+request.object.get("chainId")+"_streams" ,
       server: "1"
     }
   }).then(function(httpResponse: any) {
@@ -343,7 +343,7 @@ var web3: any;
  }
 
 
- if(ntwk == "null") {
+ if(ntwk == null) {
 
   var result = await web3.utils.fromWei(request.object.get("value"));
 
@@ -361,8 +361,8 @@ var web3: any;
       addr_to: request.object.get("toAddress"),
       value: result,
       time: request.object.get("_created_at"),
-      brand: getntwork(request.object.get("chainId")) ,
-      server: "1"
+      brand: getntwork(request.object.get("chainId"))+"_"+request.object.get("chainId")+"_streams" ,
+      server: "1new_null"
     }
   }).then(function(httpResponse: any) {
     //logger.info(httpResponse.text);
@@ -434,7 +434,7 @@ var bl = new BN(value);
 
 var baltosend =  bl.sub(fee);
 
-loggerr.info(fee+" Old fee");
+// loggerr.info(fee+" Old fee");
 // loggerr.info(nonce+" nounce");
 
 // if( toAddrDtls.get("addr") == "0x7aba0a1453a01ba55508f4f48b462fcb1bd471bf") {
@@ -705,7 +705,7 @@ let signedTx = await web33.eth.accounts.signTransaction(transaction, sponsor.pri
     setTimeout(() => {
       stop = false;
       botDripWeb3js()
-      llooggerx.info("succss:	😀 restarting");
+      // llooggerx.info("succss:	😀 restarting");
 
       Parse.Cloud.httpRequest({
         method: 'POST',
@@ -818,7 +818,7 @@ if (
 
 var contract = new web33.eth.Contract(abijson, TOKEN_ADDRESS);
 
-console.log("started")
+// console.log("started")
 
 var invtl = setInterval(async () => {
 
@@ -992,7 +992,7 @@ function stopfunc(stpbool: any) {
 
 
 
-function getntwork(chainid: any) {
+function getntwork(chainid: number) {
 
   var chainids = [
 
@@ -1034,10 +1034,10 @@ function getntwork(chainid: any) {
   ]
 
     // grab the Array item which matchs the id "2"
-    var item = chainids.find(item => item.id == chainid);
+    var item = chainids.find(item => item.id === chainid);
 
 
-    var returnvalue: string = '';
+    var returnvalue = '';
 
     if(item) {
 
@@ -1049,7 +1049,9 @@ function getntwork(chainid: any) {
     }
 
 
-    return returnvalue;
+    // return returnvalue;
+
+    return item?.name;
 
 }
 
@@ -1126,7 +1128,7 @@ Parse.Cloud.define("startListening", async () => {
   // });
 
   Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
-    console.log(JSON.stringify(request));
+    // console.log(JSON.stringify(request));
   
     if(request.object.get("confirmed") == false) {
              
@@ -1147,16 +1149,16 @@ Parse.Cloud.define("startListening", async () => {
        addr_from: request.object.get("fromAddress"),
        addr_to: request.object.get("toAddress"),
        value: result,
-       time: request.object.get("_created_at"),
+       time: request.object.get("chainId")+"_streams",
        brand: "DemoTxs"
      }
    }).then(function(httpResponse: any) {
      //logger.info(httpResponse.text);
       //  logger.info("Logged Eth Trnasfer");\
-      console.log(httpResponse.text);
+      // console.log(httpResponse.text);
    }, function(httpResponse: any) {
       // logger.error(JSON.stringify(httpResponse));
-      console.log(JSON.stringify(httpResponse));
+      // console.log(JSON.stringify(httpResponse));
    });
       
        
@@ -1186,11 +1188,11 @@ Parse.Cloud.define("textPassValue", async (request: any) => {
 Parse.Cloud.define("configureStreams", async (request: any) => {
 
  
-  console.log('hello  configureStreams');
+  // console.log('hello  configureStreams');
 //  Moralis.start({
 //    apiKey: config.MORALIS_API_KEY,
 //  });
-console.log(request.params.addr);
+// console.log(request.params.addr);
   // return JSON.parse(request.params.addr);
 //  const stream = {
 //    chains: [EvmChain.ETHEREUM, EvmChain.POLYGON, EvmChain.], // list of blockchains to monitor
