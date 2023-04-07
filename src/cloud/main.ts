@@ -47,9 +47,8 @@ Parse.Cloud.define("_AddressSyncStatus2", async  (request: any) => {
 // eth
 
 
-Parse.Cloud.beforeSave("DemoTxs", async  (request: any) => {
+Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
 
- 
   
   if(request.object.get("confirmed") == false) {
 
@@ -100,7 +99,7 @@ Parse.Cloud.beforeSave("DemoTxs", async  (request: any) => {
 
 
 
-Parse.Cloud.beforeSave("LiveTxs", async  (request: any) => {
+Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
 
  
   
