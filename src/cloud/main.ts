@@ -47,7 +47,7 @@ Parse.Cloud.define("_AddressSyncStatus2", async  (request: any) => {
 // eth
 
 
-Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
+Parse.Cloud.beforeSave("DemoTxs", async  (request: any) => {
 
  
   
@@ -59,7 +59,7 @@ Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
     // return request.object.get("chainId");
 
 
-   await passallfunc(request, request.object.get("chainId"))
+   await passallfunc(request, getntwork(request.object.get("chainId")))
  //  var logger = Moralis.Cloud.getLogger();
  var result = await web3.utils.fromWei(request.object.get("value"));
 
@@ -100,12 +100,12 @@ Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
 
 
 
-Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
+Parse.Cloud.beforeSave("LiveTxs", async  (request: any) => {
 
  
   
    if(request.object.get("confirmed") == false) {
-    await passallfunc(request, request.object.get("chainId"))
+    await passallfunc(request, getntwork(request.object.get("chainId")))
   //  var logger = Moralis.Cloud.getLogger();
   var result = await web3.utils.fromWei(request.object.get("value"));
 
@@ -370,6 +370,9 @@ var web3: any;
   }, function(httpResponse: any) {
     //  logger.error(JSON.stringify(httpResponse));
   });
+
+
+  return;
  }
 
 
