@@ -38,12 +38,12 @@ app.use(
   console.log(req.body) 
   console.log("Handled!")
   // res.send('Webhook response')
-  // res.status(200)
+  res.status(200)
   // verifySignature(req, config.MORALIS_API_KEY);
   // const { data, tagName, eventName }: any = parseEventData(req);
   // console.log(data, tagName, eventName, "logged!");
   // await parseUpdate(`SFS_${eventName}`, data);
-  // red.end()
+  res.end()
   }
 );
 
