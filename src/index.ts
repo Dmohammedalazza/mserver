@@ -11,7 +11,6 @@ import { streamsSync } from '@moralisweb3/parse-server';
 
 // Import parseDashboard.ts //
 import { parseDashboard } from "./parseDashboard";
-import { json } from 'envalid';
 
 
 
@@ -33,7 +32,7 @@ app.use(
   streamsSync(parseServer, {
     apiKey: config.MORALIS_API_KEY,
     webhookUrl: '/streams',
-  })
+  }),
 );
 
 app.use(`/server`, parseServer.app);
