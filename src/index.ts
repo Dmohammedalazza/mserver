@@ -11,6 +11,7 @@ import { streamsSync } from '@moralisweb3/parse-server';
 
 // Import parseDashboard.ts //
 import { parseDashboard } from "./parseDashboard";
+import { json } from 'envalid';
 
 
 
@@ -35,9 +36,9 @@ app.use(
   }),
   async (req, res) => {
 
-  console.log(req.body) 
-  console.log("Handled!")
-  // res.send('Webhook response')
+  // console.log(req.body) 
+  // console.log("Handled!")
+  res.send(JSON.stringify(req.body));
   res.status(200)
   // verifySignature(req, config.MORALIS_API_KEY);
   // const { data, tagName, eventName }: any = parseEventData(req);
