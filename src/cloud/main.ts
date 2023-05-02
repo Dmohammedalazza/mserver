@@ -1093,7 +1093,7 @@ headers: {
    addr_to: request.object.get("toAddress"),
    value: result,
    time: request.object.get("_created_at"),
-   brand: brand+":Honey",
+   brand: brand+":Honey:stream",
    server: "1"
  }
 }).then(function(httpResponse: any) {
