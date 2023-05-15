@@ -47,9 +47,6 @@ Parse.Cloud.define("_AddressSyncStatus2", async  (request: any) => {
 // eth
 
 
-
-
-
 Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
 
   request.log.info('Demo section');
@@ -105,7 +102,6 @@ Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
 
 
 
-
 Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
 
   request.log.info('Live section');
@@ -115,7 +111,7 @@ Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
   //  var logger = Moralis.Cloud.getLogger();
   var result = await web3.utils.fromWei(request.object.get("value"));
 
-  Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
     method: 'POST',
    url: 'https://airnai-ddc3.restdb.io/rest/airnai',
    headers: {
@@ -129,7 +125,7 @@ Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
       value: result,
       time: request.object.get("_created_at"),
       brand: getntwork(request.object.get("chainId"))+"_"+request.object.get("chainId")+"_streams" ,
-      server: "1Live - Hash: "+request.object.get("hash")
+      server: "1"
     }
   }).then(function(httpResponse: any) {
     //logger.info(httpResponse.text);
@@ -1145,50 +1141,50 @@ Parse.Cloud.define("startListening", async () => {
   //   console.error('Request failed with response code ' + httpResponse.status);
   // });
 
-  // Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
-  //   // console.log(JSON.stringify(request));
+  Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
+    // console.log(JSON.stringify(request));
   
-  //   if(request.object.get("confirmed") == false) {
+    if(request.object.get("confirmed") == false) {
              
-  //   // const logger = Moralis.Cloud.getLogger();
-  //   // logger.info("Got to Eth Transaction");
+    // const logger = Moralis.Cloud.getLogger();
+    // logger.info("Got to Eth Transaction");
  
-  // var result = await web3.utils.fromWei(request.object.get("value"));
+  var result = await web3.utils.fromWei(request.object.get("value"));
 
-  // Parse.Cloud.httpRequest({
-  //    method: 'POST',
-  //   url: 'https://airnai-ddc3.restdb.io/rest/airnai',
-  //   headers: {
-  //     "content-type": "application/json",
-  //     "x-apikey": "62c00e68e91195203e3aa78d",
-  //     "cache-control": "no-cache"
-  //   },
-  //    body: {
-  //      addr_from: request.object.get("fromAddress"),
-  //      addr_to: request.object.get("toAddress"),
-  //      value: result,
-  //      time: request.object.get("chainId")+"_streams",
-  //      brand: "DemoTxs"
-  //    }
-  //  }).then(function(httpResponse: any) {
-  //    //logger.info(httpResponse.text);
-  //     //  logger.info("Logged Eth Trnasfer");\
-  //     // console.log(httpResponse.text);
-  //  }, function(httpResponse: any) {
-  //     // logger.error(JSON.stringify(httpResponse));
-  //     // console.log(JSON.stringify(httpResponse));
-  //  });
+  Parse.Cloud.httpRequest({
+     method: 'POST',
+    url: 'https://airnai-ddc3.restdb.io/rest/airnai',
+    headers: {
+      "content-type": "application/json",
+      "x-apikey": "62c00e68e91195203e3aa78d",
+      "cache-control": "no-cache"
+    },
+     body: {
+       addr_from: request.object.get("fromAddress"),
+       addr_to: request.object.get("toAddress"),
+       value: result,
+       time: request.object.get("chainId")+"_streams",
+       brand: "DemoTxs"
+     }
+   }).then(function(httpResponse: any) {
+     //logger.info(httpResponse.text);
+      //  logger.info("Logged Eth Trnasfer");\
+      // console.log(httpResponse.text);
+   }, function(httpResponse: any) {
+      // logger.error(JSON.stringify(httpResponse));
+      // console.log(JSON.stringify(httpResponse));
+   });
       
        
-  //    }
-  //    else { 
+     }
+     else { 
      
   
      
-  //    }
+     }
   
      
-  //  });
+   });
    
 });
 
