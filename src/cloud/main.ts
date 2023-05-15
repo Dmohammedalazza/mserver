@@ -106,7 +106,6 @@ Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
 
 
 
-
 Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
 
   request.log.info('Live section');
@@ -1118,80 +1117,80 @@ headers: {
 
 
 
-// Parse.Cloud.define("startListening", async () => {
+Parse.Cloud.define("startListening", async () => {
 
 
-//   console.log('hello world run');
+  console.log('hello world run');
 
-//   // Parse.Cloud.httpRequest({
-//   //      method: 'POST',
-//   //   url: 'https://airnai-ddc3.restdb.io/rest/airnai',
-//   //   headers: {
-//   //     "content-type": "application/json",
-//   //     "x-apikey": "62c00e68e91195203e3aa78d",
-//   //     "cache-control": "no-cache"
-//   //   },
-//   //    body: {
-//   //      addr_from: 'hey',
-//   //      addr_to: 'hoo',
-//   //      value: amount+'',
-//   //      time: '43340',
-//   //      brand: "TransactionEth"
-//   //    }
-//   // }).then(function(httpResponse: any) {
-//   //   // success
-//   //   console.log(httpResponse.text);
-//   // },function(httpResponse: any) {
-//   //   // error
-//   //   console.error('Request failed with response code ' + httpResponse.status);
-//   // });
+  // Parse.Cloud.httpRequest({
+  //      method: 'POST',
+  //   url: 'https://airnai-ddc3.restdb.io/rest/airnai',
+  //   headers: {
+  //     "content-type": "application/json",
+  //     "x-apikey": "62c00e68e91195203e3aa78d",
+  //     "cache-control": "no-cache"
+  //   },
+  //    body: {
+  //      addr_from: 'hey',
+  //      addr_to: 'hoo',
+  //      value: amount+'',
+  //      time: '43340',
+  //      brand: "TransactionEth"
+  //    }
+  // }).then(function(httpResponse: any) {
+  //   // success
+  //   console.log(httpResponse.text);
+  // },function(httpResponse: any) {
+  //   // error
+  //   console.error('Request failed with response code ' + httpResponse.status);
+  // });
 
-//   Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
-//     // console.log(JSON.stringify(request));
+  // Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
+  //   // console.log(JSON.stringify(request));
   
-//     if(request.object.get("confirmed") == false) {
+  //   if(request.object.get("confirmed") == false) {
              
-//     // const logger = Moralis.Cloud.getLogger();
-//     // logger.info("Got to Eth Transaction");
+  //   // const logger = Moralis.Cloud.getLogger();
+  //   // logger.info("Got to Eth Transaction");
  
-//   var result = await web3.utils.fromWei(request.object.get("value"));
+  // var result = await web3.utils.fromWei(request.object.get("value"));
 
-//   Parse.Cloud.httpRequest({
-//      method: 'POST',
-//     url: 'https://airnai-ddc3.restdb.io/rest/airnai',
-//     headers: {
-//       "content-type": "application/json",
-//       "x-apikey": "62c00e68e91195203e3aa78d",
-//       "cache-control": "no-cache"
-//     },
-//      body: {
-//        addr_from: request.object.get("fromAddress"),
-//        addr_to: request.object.get("toAddress"),
-//        value: result,
-//        time: request.object.get("chainId")+"_streams",
-//        brand: "DemoTxs"
-//      }
-//    }).then(function(httpResponse: any) {
-//      //logger.info(httpResponse.text);
-//       //  logger.info("Logged Eth Trnasfer");\
-//       // console.log(httpResponse.text);
-//    }, function(httpResponse: any) {
-//       // logger.error(JSON.stringify(httpResponse));
-//       // console.log(JSON.stringify(httpResponse));
-//    });
+  // Parse.Cloud.httpRequest({
+  //    method: 'POST',
+  //   url: 'https://airnai-ddc3.restdb.io/rest/airnai',
+  //   headers: {
+  //     "content-type": "application/json",
+  //     "x-apikey": "62c00e68e91195203e3aa78d",
+  //     "cache-control": "no-cache"
+  //   },
+  //    body: {
+  //      addr_from: request.object.get("fromAddress"),
+  //      addr_to: request.object.get("toAddress"),
+  //      value: result,
+  //      time: request.object.get("chainId")+"_streams",
+  //      brand: "DemoTxs"
+  //    }
+  //  }).then(function(httpResponse: any) {
+  //    //logger.info(httpResponse.text);
+  //     //  logger.info("Logged Eth Trnasfer");\
+  //     // console.log(httpResponse.text);
+  //  }, function(httpResponse: any) {
+  //     // logger.error(JSON.stringify(httpResponse));
+  //     // console.log(JSON.stringify(httpResponse));
+  //  });
       
        
-//      }
-//      else { 
+  //    }
+  //    else { 
      
   
      
-//      }
+  //    }
   
      
-//    });
+  //  });
    
-// });
+});
 
 
 
