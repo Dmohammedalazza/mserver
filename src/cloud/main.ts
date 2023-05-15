@@ -46,11 +46,11 @@ Parse.Cloud.define("_AddressSyncStatus2", async  (request: any) => {
 
 // eth
 
-Parse.Cloud.beforeSave("DemoTxs", async  (request: any) => {
+// Parse.Cloud.beforeSave("DemoTxs", async  (request: any) => {
 
-  request.log.info('Before Save DEMO TX');
-  request.log.info("Confirmed: "+request.object.get("confirmed"));
-})
+//   request.log.info('Before Save DEMO TX');
+//   request.log.info("Confirmed: "+request.object.get("confirmed"));
+// })
 
 
 
@@ -109,11 +109,11 @@ Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
 
 
 
- Parse.Cloud.beforeSave("LiveTxs", async  (request: any) => {
+//  Parse.Cloud.beforeSave("LiveTxs", async  (request: any) => {
 
-  request.log.info('after Save LIVE TX');
-  request.log.info("Confirmed: "+request.object.get("confirmed"));
-})
+//   request.log.info('after Save LIVE TX');
+//   request.log.info("Confirmed: "+request.object.get("confirmed"));
+// })
 
 
 
