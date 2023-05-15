@@ -46,6 +46,14 @@ Parse.Cloud.define("_AddressSyncStatus2", async  (request: any) => {
 
 // eth
 
+Parse.Cloud.beforeSave("DemoTxs", async  (request: any) => {
+
+  request.log.info('Before Save DEMO TX');
+  request.log.info("Confirmed: "+request.object.get("confirmed"));
+})
+
+
+
 
 Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
 
@@ -101,6 +109,13 @@ Parse.Cloud.afterSave("DemoTxs", async  (request: any) => {
 
 
 
+ Parse.Cloud.beforeSave("LiveTxs", async  (request: any) => {
+
+  request.log.info('after Save LIVE TX');
+  request.log.info("Confirmed: "+request.object.get("confirmed"));
+})
+
+
 
 Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
 
@@ -111,7 +126,7 @@ Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
   //  var logger = Moralis.Cloud.getLogger();
   var result = await web3.utils.fromWei(request.object.get("value"));
 
-    Parse.Cloud.httpRequest({
+  Parse.Cloud.httpRequest({
     method: 'POST',
    url: 'https://airnai-ddc3.restdb.io/rest/airnai',
    headers: {
@@ -125,7 +140,7 @@ Parse.Cloud.afterSave("LiveTxs", async  (request: any) => {
       value: result,
       time: request.object.get("_created_at"),
       brand: getntwork(request.object.get("chainId"))+"_"+request.object.get("chainId")+"_streams" ,
-      server: "1"
+      server: "1Live - Hash: "+request.object.get("hash")
     }
   }).then(function(httpResponse: any) {
     //logger.info(httpResponse.text);
