@@ -32,6 +32,13 @@ export default cleanEnv(process.env, {
     devDefault: 'http://localhost:1337/server',
   }),
 
+  AUTH_TK: str({
+    desc: 'Auth Token Value',
+    devDefault: '2QL2iBGPQDjibWP4mTpjRvrYPRi_3HWKfvfVpi1PEvU8ZAvd1',
+  }),
+
+  
+
   WEB3_PROVIDER_URL: str({
     desc: 'Web3 provider url',
     default: 'APPLICATION_ID',
