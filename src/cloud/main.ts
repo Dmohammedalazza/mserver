@@ -7,7 +7,9 @@ import { requestMessage } from '../auth/authService';
 import "./cloud";
 import config from '../config';
 import Moralis from 'moralis';
+// import addr from '../addr';
 
+// console.log(addr)
 // import Moralis from 'moralis';
 import Web3 from 'web3';
 import { parse } from 'path';
