@@ -24,9 +24,8 @@ RUN git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew \
 && mkdir ~/.linuxbrew/bin \
 && ln -s ../Homebrew/bin/brew ~/.linuxbrew/bin \
 && eval $(~/.linuxbrew/bin/brew shellenv) \
-&& brew --version
+&& brew --version && brew install ngrok/ngrok/ngrok
 
-RUN brew install ngrok/ngrok/ngrok
 
 RUN ngrok version;
 
