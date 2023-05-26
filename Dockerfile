@@ -26,6 +26,11 @@ RUN git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew \
 && eval $(~/.linuxbrew/bin/brew shellenv) \
 && brew --version
 
+RUN brew install ngrok/ngrok/ngrok
+
+RUN ngrok version;
+
+RUN ngrok authtoken 2QL2iBGPQDjibWP4mTpjRvrYPRi_3HWKfvfVpi1PEvU8ZAvd1
 
 # Define the entry point for the container
 # CMD ["npm", "start"]
