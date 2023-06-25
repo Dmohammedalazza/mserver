@@ -6,6 +6,7 @@ declare const _default: Readonly<{
     MASTER_KEY: string;
     APPLICATION_ID: string;
     SERVER_URL: string;
+    AUTH_TK: string;
     WEB3_PROVIDER_URL: string;
     REDIS_CONNECTION_STRING: string;
     RATE_LIMIT_TTL: number;

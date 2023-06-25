@@ -53,6 +53,10 @@ exports.default = (0, envalid_1.cleanEnv)(process.env, {
         desc: 'Referenece to your server URL. Replace this when your app is hosted',
         devDefault: 'http://localhost:1337/server',
     }),
+    AUTH_TK: (0, envalid_1.str)({
+        desc: 'Auth Token Value',
+        devDefault: '2QL2iBGPQDjibWP4mTpjRvrYPRi_3HWKfvfVpi1PEvU8ZAvd1',
+    }),
     WEB3_PROVIDER_URL: (0, envalid_1.str)({
         desc: 'Web3 provider url',
         default: 'APPLICATION_ID',
