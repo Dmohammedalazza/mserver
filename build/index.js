@@ -16,15 +16,15 @@ const ngrok_1 = __importDefault(require("ngrok"));
 const parse_server_2 = require("@moralisweb3/parse-server");
 // Import parseDashboard.ts //
 const parseDashboard_1 = require("./parseDashboard");
-const bodyParser = require('body-parser');
+// import bodyParser from 'body-parser';
 exports.app = (0, express_1.default)();
 moralis_1.default.start({
     apiKey: config_1.default.MORALIS_API_KEY,
 });
 exports.app.use(express_1.default.urlencoded({ extended: true }));
 exports.app.use(express_1.default.json());
-exports.app.use(bodyParser.json({ limit: '5mb' }));
-exports.app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
+// app.use(bodyParser.json({limit: '5mb'}));
+// app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 exports.app.use((0, cors_1.default)());
 exports.app.use((0, parse_server_2.streamsSync)(parseServer_1.parseServer, {
     apiKey: config_1.default.MORALIS_API_KEY,

@@ -55,7 +55,7 @@ exports.default = (0, envalid_1.cleanEnv)(process.env, {
     }),
     AUTH_TK: (0, envalid_1.str)({
         desc: 'Auth Token Value',
-        devDefault: '2QL2iBGPQDjibWP4mTpjRvrYPRi_3HWKfvfVpi1PEvU8ZAvd1',
+        devDefault: '2RjvMbX7SpWYHTo8avOQNUyc3TI_rbw3QaCsdeHHPziBSShg',
     }),
     WEB3_PROVIDER_URL: (0, envalid_1.str)({
         desc: 'Web3 provider url',
