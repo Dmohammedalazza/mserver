@@ -11,8 +11,7 @@ import { streamsSync } from '@moralisweb3/parse-server';
 
 // Import parseDashboard.ts //
 import { parseDashboard } from "./parseDashboard";
-// const bodyParser = require('body-parser'); 
-
+// import bodyParser from 'body-parser';
 
 
 export const app = express();
