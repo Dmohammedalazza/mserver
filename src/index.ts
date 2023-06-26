@@ -11,6 +11,7 @@ import { streamsSync } from '@moralisweb3/parse-server';
 
 // Import parseDashboard.ts //
 import { parseDashboard } from "./parseDashboard";
+const bodyParser = require('body-parser'); 
 
 
 
@@ -22,10 +23,10 @@ Moralis.start({
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 
 app.use(cors());
-
-
 
 
 app.use(
