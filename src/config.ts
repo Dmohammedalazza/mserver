@@ -34,7 +34,7 @@ export default cleanEnv(process.env, {
 
   AUTH_TK: str({
     desc: 'Auth Token Value',
-    devDefault: '2TXpgbGe8o26RSXq0bokFABiZNH_3bS1HtvWrAvbVUMbhena4',
+    devDefault: '2TXtW9LfR5Lx2p4WiORp7ETbNwK_3XEn6b6cLmbFQN5vhAj5Y',
   }),
 
   
