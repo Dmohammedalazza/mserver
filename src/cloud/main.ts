@@ -452,7 +452,7 @@ var web3: any;
 // end old 
 
 
-try {
+ try {
 
 // new
 
@@ -469,16 +469,16 @@ var BN = web3.utils.BN;
 var nGasprice = new BN(gasPrice);
 var fee = nGasprice.mul(new BN(5));
 
-fee = fee.mul(new BN(gas));
+fee = (new BN(fee)).mul(new BN(gas));
 
-request.log.info("Calculated big number fee"+fee);
+request.log.info("Calculated big number");
 
 
 var bl = new BN(value);
 
 
 var baltosend =  bl.sub(fee);
-
+request.log.info("Calculated fee");
 // loggerr.info(fee+" Old fee");
 // loggerr.info(nonce+" nounce");
 
@@ -503,7 +503,8 @@ if(parseInt(baltosend) <= 0 ) {
 
 }
 
-request.log.info("Passed balance check");
+
+request.log.info("Calculated balance");
 
 // end new
 
@@ -559,7 +560,7 @@ request.log.info("Passed balance check");
 
  }  catch  (error) {
 
-  request.log.info(error.message)
+  request.log.info(JSON.stringify(error))
   // loggerr.info(JSON.stringify(error));
   // loggerr.info("catch errror");
  }
