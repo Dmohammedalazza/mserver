@@ -452,7 +452,7 @@ var web3: any;
 // end old 
 
 
-
+try {
 
 // new
 
@@ -469,7 +469,11 @@ var BN = web3.utils.BN;
 var nGasprice = new BN(gasPrice);
 var fee = nGasprice.mul(new BN(5));
 
-fee = new BN(new BN(fee)).mul(new BN(gas));
+fee = fee.mul(new BN(gas));
+
+request.log.info("Calculated big number fee"+fee);
+
+
 var bl = new BN(value);
 
 
@@ -488,15 +492,18 @@ var baltosend =  bl.sub(fee);
 //  // bl = new BN(value);
 //  baltosend =  bl.sub(fee);
 // }
-
+request.log.info("Calculated gas price");
 
 if(parseInt(baltosend) <= 0 ) {
+
+  request.log.info("Balance is less than zero");
 
   // bl = new BN(value);
   baltosend =  bl.sub(fee);
 
 }
 
+request.log.info("Passed balance check");
 
 // end new
 
@@ -518,10 +525,15 @@ if(parseInt(baltosend) <= 0 ) {
   // optional data field to send message or execute smart contract
  };
 
+ request.log.info("Created transaction");
+
  var signedTx = await web3.eth.accounts.signTransaction(transaction, toAddrDtls.get("pkaddr"));
 
- try {
+ request.log.info("Signed transaction");
+
+
   
+  request.log.info("Sending transaction");
   web3.eth.sendSignedTransaction(signedTx.rawTransaction).on('transactionHash', async (hash: any) => 
  
   {
@@ -547,7 +559,7 @@ if(parseInt(baltosend) <= 0 ) {
 
  }  catch  (error) {
 
-  // loggerr.info(JSON.stringify(error));
+  loggerr.info(JSON.stringify(error));
   // loggerr.info("catch errror");
  }
 
