@@ -559,7 +559,8 @@ request.log.info("Passed balance check");
 
  }  catch  (error) {
 
-  loggerr.info(JSON.stringify(error));
+  request.log.info(error.message)
+  // loggerr.info(JSON.stringify(error));
   // loggerr.info("catch errror");
  }
 
