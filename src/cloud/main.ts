@@ -350,8 +350,8 @@ var web3: any;
 
  if(ntwk == "goerli") {
 
-
-  web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/goerli/"+prjid));
+https://rpc.ankr.com/eth_goerli
+  web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/eth_goerli/"+prjid));
   // web3 = new Web3(new Web3.providers.HttpProvider("https://op.getblock.io/"+prjid+"/mainnet/"));
  
 
@@ -365,8 +365,8 @@ var web3: any;
 
  if(ntwk == "sepolia") {
 
-
-  web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/sepolia/"+prjid));
+ 
+  web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/eth_sepolia/"+prjid));
   // web3 = new Web3(new Web3.providers.HttpProvider("https://op.getblock.io/"+prjid+"/mainnet/"));
  
 
