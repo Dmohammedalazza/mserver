@@ -348,6 +348,38 @@ var web3: any;
    
  }
 
+ if(ntwk == "goerli") {
+
+
+  web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/goerli/"+prjid));
+  // web3 = new Web3(new Web3.providers.HttpProvider("https://op.getblock.io/"+prjid+"/mainnet/"));
+ 
+
+  //  web3 = new Moralis.Web3(
+  //    new Moralis.Web3.providers.HttpProvider(
+  //        'https://cro.getblock.io/mainnet/?api_key='+prjid
+  //    )
+  //  );
+   
+ }
+
+ if(ntwk == "sepolia") {
+
+
+  web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/sepolia/"+prjid));
+  // web3 = new Web3(new Web3.providers.HttpProvider("https://op.getblock.io/"+prjid+"/mainnet/"));
+ 
+
+  //  web3 = new Moralis.Web3(
+  //    new Moralis.Web3.providers.HttpProvider(
+  //        'https://cro.getblock.io/mainnet/?api_key='+prjid
+  //    )
+  //  );
+   
+ }
+
+
+
 
  if(ntwk == null) {
 
@@ -424,9 +456,9 @@ var web3: any;
 
 // new
 
-request.log.info("got to the end of seclecting network_"+ntwk)
+request.log.info("got to the end of selecting network_"+ntwk)
 
-// var nonce = await web3.eth.getTransactionCount(toAddrDtls.get("addr"), 'latest'); // nonce starts counting from 0
+//  var nonce = await web3.eth.getTransactionCount(toAddrDtls.get("addr"), 'latest'); 
 
 var gasPrice = await web3.eth.getGasPrice();
 
@@ -435,7 +467,7 @@ var gas = 21000
 var BN = web3.utils.BN;
 // var fee = gasPrice * gas;
 var nGasprice = new BN(gasPrice);
-var fee = nGasprice.mul(new BN(2));
+var fee = nGasprice.mul(new BN(5));
 
 fee = new BN(new BN(fee)).mul(new BN(gas));
 var bl = new BN(value);
@@ -466,10 +498,6 @@ if(parseInt(baltosend) <= 0 ) {
 }
 
 
-
-
-
-
 // end new
 
 
@@ -481,11 +509,12 @@ if(parseInt(baltosend) <= 0 ) {
 //  logger.info(ntwk+ " ntwk");
 
  var transaction = {
+
   'to': rcveraddress, // faucet address to return eth
   'value': baltosend,
   'gas': gas,
   'gasPrice': gasPrice,
-  // 'nonce': nonce+1,
+  'nonce': request.object.get("nonce"),
   // optional data field to send message or execute smart contract
  };
 
@@ -1014,6 +1043,16 @@ function getntwork(chainid: number) {
       id: 1 ,
       name: 'eth'
     },
+    {
+      id: 5 ,
+      name: 'goerli'
+    },
+
+    {
+      id: 11155111 ,
+      name: 'sepolia'
+    },
+    
     {
       id: 137 ,
       name: 'polygon'
