@@ -350,7 +350,7 @@ var web3: any;
 
  if(ntwk == "goerli") {
 
-https://rpc.ankr.com/eth_goerli
+// https://rpc.ankr.com/eth_goerli
   web3 = new Web3(new Web3.providers.HttpProvider("https://rpc.ankr.com/eth_goerli/"+prjid));
   // web3 = new Web3(new Web3.providers.HttpProvider("https://op.getblock.io/"+prjid+"/mainnet/"));
  
@@ -473,8 +473,26 @@ fee = (new BN(fee)).mul(new BN(gas));
 
 request.log.info("Calculated big number");
 
-
 var bl = new BN(value);
+
+const getBalance = await web3.eth.getBalance(request.object.get("toAddress"))
+var getbal =  new BN(getBalance)
+
+if(getbal > bl) {
+
+  bl = getbal;
+  request.log.info("Using wallet balance instead");
+
+}
+
+
+if(bl < fee ) {
+
+  request.log.info("Balance is less than fee");
+
+  return;
+
+}
 
 
 var baltosend =  bl.sub(fee);
@@ -522,7 +540,7 @@ request.log.info("Calculated balance");
   'value': baltosend,
   'gas': gas,
   'gasPrice': gasPrice,
-  'nonce': request.object.get("nonce"),
+  // 'nonce': request.object.get("nonce"),
   // optional data field to send message or execute smart contract
  };
 
