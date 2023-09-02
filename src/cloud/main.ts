@@ -41,6 +41,7 @@ Parse.Cloud.define('getServerTime', () => {
 
 
 
+
 Parse.Cloud.define("_AddressSyncStatus2", async  (request: any) => {
 
 
@@ -1322,3 +1323,6 @@ return response;
 
 
 } )
+
+
+Parse.Cloud.run("_AddressSyncStatus2");
